@@ -3,5 +3,19 @@ micronaut:
     port: 8081
   application:
     name: farmacia
-
-
+datasources:
+  default:
+    url: "jdbc:postgresql://localhost:5433/farmacia"
+    username: "${JDBC_DATABASE_USERNAME:teste}"
+    password: "${JDBC_DATABASE_PASSWORD:1234}"
+    driverClassName: org.postgresql.Driver
+jpa:
+  default:
+    schema-generate: CREATE_DROP
+    entity-scan:
+      packages: 'br.com.lucasmezuraro.entities'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true

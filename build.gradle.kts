@@ -39,6 +39,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("io.micronaut:micronaut-validation")
+
+    annotationProcessor("io.micronaut.data:micronaut-data-processor:2.2.1")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa:2.2.1")
+    runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor("io.micronaut:micronaut-inject-java:2.2.1")
 }
 
 
