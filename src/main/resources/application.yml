@@ -2,7 +2,20 @@ micronaut:
   server:
     port: 8081
   application:
-    name: farmacia
+    name: farmacia.
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+endpoints:
+  metrics:
+    enabled: false
+  prometheus:
+    sensitive: false
+
 datasources:
   default:
     url: "jdbc:postgresql://localhost:5433/farmacia"

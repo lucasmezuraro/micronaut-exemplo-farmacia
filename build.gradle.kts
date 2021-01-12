@@ -28,6 +28,12 @@ micronaut {
 
 
 dependencies {
+    compile("io.micronaut.configuration:micronaut-micrometer-core:1.3.1")
+    //compile("io.micronaut.configuration:micronaut-micrometer-registry-statsd:1.3.1")
+    compile("io.micronaut:micronaut-management:2.2.1")
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("io.micronaut.configuration:micronaut-micrometer-registry-prometheus:1.3.1")
+
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-http-server-netty")
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -45,6 +51,10 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa:2.2.1")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("io.micronaut:micronaut-inject-java:2.2.1")
+
+
+
+
 }
 
 

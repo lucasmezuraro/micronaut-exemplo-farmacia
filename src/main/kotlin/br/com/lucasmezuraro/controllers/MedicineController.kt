@@ -5,6 +5,7 @@ import br.com.lucasmezuraro.entities.Medicine
 import br.com.lucasmezuraro.repositories.MedicineRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
+import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
@@ -33,7 +34,7 @@ class MedicineController {
         return HttpResponse.ok(medicine)
     }
 
-    @Get("/{id}")
+    @Get("/{id}", produces = arrayOf(MediaType.APPLICATION_JSON))
     fun findById(@PathVariable("id") id: Long): HttpResponse<*> {
         println("ID")
         val medicine: Optional<Medicine> = medicineRepository.findById(id)
@@ -41,7 +42,7 @@ class MedicineController {
             return HttpResponse.ok(medicine)
         }else {
            val error: Map<String, String> = mapOf("message" to "medicamento com o id: $id não encontrado.")
-           return HttpResponse.notFound(error)
+            return HttpResponse.notFound(error)
         }
     }
 
