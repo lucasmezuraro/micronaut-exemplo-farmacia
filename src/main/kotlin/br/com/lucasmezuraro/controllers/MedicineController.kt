@@ -4,9 +4,14 @@ import br.com.lucasmezuraro.dtos.MedicineDTO
 import br.com.lucasmezuraro.entities.Medicine
 import br.com.lucasmezuraro.repositories.MedicineRepository
 import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
+import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.client.exceptions.HttpClientResponseException
+
+import java.util.*
 import javax.inject.Inject
 
 @Controller("/")
@@ -26,6 +31,22 @@ class MedicineController {
     fun create(medicineDTO: MedicineDTO): HttpResponse<*> {
        val medicine: Medicine = medicineRepository.save(medicineDTO.toModel())
         return HttpResponse.ok(medicine)
+    }
+
+    @Get("/{id}")
+    fun findById(@PathVariable("id") id: Long): HttpResponse<*> {
+        println("ID")
+        val medicine: Optional<Medicine> = medicineRepository.findById(id)
+        if (medicine.isPresent) {
+            return HttpResponse.ok(medicine)
+        }else {
+           val error: Map<String, String> = mapOf("message" to "medicamento com o id: $id não encontrado.")
+           return HttpResponse.notFound(error)
+        }
+
+        //throw HttpClientResponseException("medicamento com o id: $id não encontrado.", HttpResponse.notFound("medicamento com o id: $id não encontrado."))
+
+
     }
 
 }
