@@ -43,10 +43,6 @@ class MedicineController {
            val error: Map<String, String> = mapOf("message" to "medicamento com o id: $id não encontrado.")
            return HttpResponse.notFound(error)
         }
-
-        //throw HttpClientResponseException("medicamento com o id: $id não encontrado.", HttpResponse.notFound("medicamento com o id: $id não encontrado."))
-
-
     }
 
 }
