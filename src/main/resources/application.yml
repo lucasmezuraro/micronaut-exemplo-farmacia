@@ -1,6 +1,6 @@
 micronaut:
   server:
-    port: 8081
+    port: "${SERVER_PORT:8085}"
   application:
     name: farmacia.
   metrics:
@@ -10,6 +10,9 @@ micronaut:
         enabled: true
         step: PT1M
         descriptions: true
+  caches:
+    teste:
+      charset: 'UTF-8'
 endpoints:
   metrics:
     enabled: false
@@ -32,3 +35,4 @@ jpa:
         hbm2ddl:
           auto: update
         show_sql: true
+

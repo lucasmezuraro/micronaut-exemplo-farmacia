@@ -11,6 +11,27 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: farmacia
       POSTGRES_HOST: postgres
+    networks:
+      - application
+    links:
+      - redis
+  redis:
+    container_name: redis_micronaut
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+    networks: 
+      - application
 
+networks:
+    application:
+        driver: bridge
 volumes:
   postgres-volume:
+  redis_data:

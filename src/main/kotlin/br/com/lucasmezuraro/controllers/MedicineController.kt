@@ -1,20 +1,25 @@
 package br.com.lucasmezuraro.controllers
 
+import io.micronaut.cache.annotation.CacheConfig;
+import io.micronaut.cache.annotation.CacheInvalidate;
+import io.micronaut.cache.annotation.CachePut;
+import io.micronaut.cache.annotation.Cacheable;
+
 import br.com.lucasmezuraro.dtos.MedicineDTO
 import br.com.lucasmezuraro.entities.Medicine
 import br.com.lucasmezuraro.repositories.MedicineRepository
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.PathVariable
-import io.micronaut.http.annotation.Post
-import io.micronaut.http.client.exceptions.HttpClientResponseException
+import io.micronaut.http.annotation.*
+import io.micronaut.validation.Validated
 
 import java.util.*
 import javax.inject.Inject
+import javax.validation.Valid
 
+import java.net.InetAddress;
+
+@Validated
 @Controller("/")
 class MedicineController {
 
@@ -29,7 +34,7 @@ class MedicineController {
     }
 
     @Post("/")
-    fun create(medicineDTO: MedicineDTO): HttpResponse<*> {
+    fun create(@Valid @Body medicineDTO: MedicineDTO): HttpResponse<*> {
        val medicine: Medicine = medicineRepository.save(medicineDTO.toModel())
         return HttpResponse.ok(medicine)
     }
@@ -44,6 +49,15 @@ class MedicineController {
            val error: Map<String, String> = mapOf("message" to "medicamento com o id: $id não encontrado.")
             return HttpResponse.notFound(error)
         }
+    }
+
+    @Get("/teste")
+    fun teste(): HttpResponse<*> {
+        val inetAddress: InetAddress = InetAddress.getLocalHost()
+        println("IP Address:- $inetAddress.getHostAddress()")
+        println("Host Name:- $inetAddress.getHostName()")
+
+        return HttpResponse.ok("Hostname: $inetAddress")
     }
 
 }

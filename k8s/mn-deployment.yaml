@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmacia-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: farmacia
+          image: lpmezuraro/farmacia:v19
+          env:
+           - name: "DATASOURCES_DEFAULT_URL"
+             value: "jdbc:postgresql://postgres:5432/farmacia"
+          ports:
+            - containerPort: 8085

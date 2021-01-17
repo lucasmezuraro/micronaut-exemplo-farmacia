@@ -51,7 +51,10 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa:2.2.1")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("io.micronaut:micronaut-inject-java:2.2.1")
-
+    //implementation("io.micronaut.configuration:micronaut-jdbc-hikari:2.2.1")
+    //implementation("io.micronaut.cache:micronaut-cache-caffeine:2.0.0")
+    implementation("io.micronaut.cache:micronaut-cache-core")
+    implementation("io.micronaut.redis:micronaut-redis-lettuce")
 
 
 
